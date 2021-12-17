@@ -22,4 +22,4 @@
 
 implements of [R-BiLSTM-C](https://ieeexplore.ieee.org/abstract/document/8903243) [BiLISTM-Dense](https://dl.acm.org/doi/abs/10.1145/3369412.3395067) [MS-TL](https://ieeexplore.ieee.org/abstract/document/9484749/) refer to [CAU-Tstega/Text-steganalysis](https://github.com/CAU-Tstega/Text-steganalysis)
 
-## 欢迎补充与讨论 (both supplement and discussion are grateful and helpful)
+# 欢迎补充与讨论 (both supplement and discussion are grateful and helpful)
