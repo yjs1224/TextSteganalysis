@@ -1,0 +1,134 @@
+{
+  "use_processor": true,
+  "out_dir": "./cnn/1124-movie-ori",
+  "checkpoint": "bert-cnn-best",
+  "record_file": "record.txt",
+  "model": "gnn",
+  "class_num": 2,
+  "tokenizer": false,
+  "seed": 42,
+  "gpuid": "0",
+  "task_name": "graph_steganalysis",
+  "use_plm":true,
+
+  "Dataset": {
+    "name": "tweet",
+    "stego_file": "data/stego.txt",
+    "cover_file": "data/cover.txt",
+    "csv_dir": "data",
+    "resplit": true,
+    "split_ratio": 0.8,
+    "save_cache": false,
+    "overwrite_cache": true
+  },
+  "Tokenizer": {
+    "model_name_or_path": "bert-base-uncased"
+  },
+  "Training_with_Processor": {
+    "num_train_epochs": 1,
+    "learning_rate": 1e-4,
+    "eval_and_save_steps": 50,
+    "model_name_or_path": "prajjwal1/bert-tiny",
+    "do_lower_case":true,
+    "per_gpu_train_batch_size": 40,
+    "per_gpu_eval_batch_size": 100,
+    "n_gpu": 1,
+    "max_steps": -1,
+    "gradient_accumulation_steps": 1,
+    "warmup_ratio": 0.06,
+    "weight_decay": 0.01,
+    "adam_epsilon": 1e-8,
+    "max_grad_norm": 1.0,
+    "logging_steps": -1,
+    "evaluate_during_training": true,
+    "save_only_best": true,
+    "use_fixed_seq_length": true,
+    "eval_all_checkpoints": true,
+    "skip_evaluate_dev":false
+  },
+  "Training": {
+    "batch_size": 100,
+    "epoch": 10,
+    "learning_rate": 0.001,
+    "early_stop": 50,
+    "warmup_ratio": 0.06,
+    "weight_decay": 0.01,
+    "adam_epsilon": 1e-8
+  },
+  "Vocabulary": {
+    "word_drop": 0,
+    "do_lower": true,
+    "max_length": 60
+  },
+
+  "CNN": {
+	"embed_size": 128,
+	"filter_num": 128,
+	"filter_size": [3, 4, 5],
+    "dropout_rate": 0.2,
+    "criteration": "CrossEntropyLoss"
+  },
+  "RNN": {
+    "cell":"bi-lstm",
+    "embed_size": 128,
+    "hidden_dim": 256,
+	"num_layers": 1,
+    "dropout_rate": 0.2,
+    "criteration": "CrossEntropyLoss"
+  },
+  "FCN": {
+    "embed_size": 128,
+    "dropout_rate": 0.2,
+    "criteration": "CrossEntropyLoss"
+  },
+  "LSTMATT": {
+    "embed_size":  128,
+    "hidden_dim": 256,
+    "dropout_rate":0.2,
+    "criteration": "CrossEntropyLoss",
+    "bidirectional": true
+  },
+  "RBiLSTMC": {
+    "num_layers": 1,
+    "kernel_sizes": [3,4,5],
+    "kernel_num": 128,
+    "embed_dim": 128,
+    "hidden_dim": 256,
+    "LSTM_dropout": 0.2,
+    "CNN_dropout": 0.2,
+    "Ci": 1,
+    "criteration": "CrossEntropyLoss"
+  },
+  "BiLSTMDENSE": {
+    "num_layers": 1,
+    "embed_dim": 256,
+    "hidden_dim": 200,
+    "dropout_rate": 0.2,
+    "criteration": "CrossEntropyLoss"
+  },
+  "SESY": {
+    "clf": "cnn",
+    "criteration": "CrossEntropyLoss",
+    "strategy": "cas",
+    "embed_size": 100,
+    "hidden_dim": 128,
+    "readout_size": 64,
+    "gat_alpha": 0.2,
+    "gat_heads": 8,
+    "dropout_rate": 0.2,
+    "TC_configs": {
+      "cnn": {
+        "filter_num": 128,
+        "filter_size": [3, 4, 5]
+
+      },
+      "rnn": {
+        "cell":"bi-lstm",
+        "hidden_dim": 256,
+        "num_layers": 1
+      },
+      "fc": {
+      }
+    }
+  }
+}
