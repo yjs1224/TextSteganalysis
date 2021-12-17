@@ -1,5 +1,6 @@
 # 文本隐写分析 (linguistic steganalysis)
 
+
 ## 包含（include）
 ### Non-Transformer-based
 - [TS-CSW: text steganalysis and hidden capacity estimation based on convolutional sliding windows (TS-CSW)](https://link.springer.com/article/10.1007/s11042-020-08716-w)
@@ -20,3 +21,5 @@
 基础 [R-BiLSTM-C](https://ieeexplore.ieee.org/abstract/document/8903243) [BiLISTM-Dense](https://dl.acm.org/doi/abs/10.1145/3369412.3395067) [MS-TL](https://ieeexplore.ieee.org/abstract/document/9484749/) 模型的实现参考自[CAU-Tstega/Text-steganalysis](https://github.com/CAU-Tstega/Text-steganalysis)
 
 implements of [R-BiLSTM-C](https://ieeexplore.ieee.org/abstract/document/8903243) [BiLISTM-Dense](https://dl.acm.org/doi/abs/10.1145/3369412.3395067) [MS-TL](https://ieeexplore.ieee.org/abstract/document/9484749/) refer to [CAU-Tstega/Text-steganalysis](https://github.com/CAU-Tstega/Text-steganalysis)
+
+## 欢迎补充与讨论 (both supplement and discussion are grateful and helpful)
