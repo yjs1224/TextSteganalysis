@@ -397,6 +397,8 @@ def train( model, Configs, tokenizer):
                         or (step+1==t_total):
                     # evaluate
                     results, _, _ = evaluate(model, tokenizer, Configs, Configs.task_name, use_tqdm=False)
+                    logger.info("------Next Evalset will be loaded from cached file------")
+                    Configs.Dataset.overwrite_cache = False
                     for key, value in results.items():
                         logs[f"eval_{key}"] = value
                     logger.info(json.dumps({**logs, **{"step": global_step}}))
@@ -564,7 +566,7 @@ def load_and_cache_examples(Dataset_Configs, task, tokenizer, split="train"):
         elif split == "test":
             get_examples = processor.get_test_examples
 
-        _,examples = get_examples(Dataset_Configs.csv_dir)
+        examples = get_examples(Dataset_Configs.csv_dir)
         dataset = processor.convert_examples_to_features(examples,)
         logger.info("\tFinished creating features")
 

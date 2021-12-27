@@ -66,8 +66,9 @@ class SteganalysisProcessor(object):
                     label = 1
                 examples.append(InputExample(sentence=sentence, label=label))
 
-        dataset = self.convert_examples_to_features(examples)
-        return dataset, examples
+        # dataset = self.convert_examples_to_features(examples)
+        # return dataset, examples
+        return examples
 
 
     def convert_examples_to_features(self, examples):
