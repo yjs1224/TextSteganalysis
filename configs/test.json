@@ -1,15 +1,15 @@
 {
   "use_processor": true,
-  "out_dir": "./cnn/1124-movie-ori",
-  "checkpoint": "bert-cnn-best",
+  "out_dir": "out_dir",
+  "checkpoint": "best",
   "record_file": "record.txt",
-  "model": "gnn",
+  "model": "cnn",
   "class_num": 2,
   "tokenizer": false,
   "seed": 42,
   "gpuid": "0",
-  "task_name": "graph_steganalysis",
-  "use_plm":true,
+  "task_name": "steganalysis",
+  "use_plm":false,
 
   "Dataset": {
     "name": "tweet",
