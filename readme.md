@@ -11,7 +11,7 @@
 - [Linguistic Steganalysis With Graph Neural Networks (GNN) (waiting......) ](https://ieeexplore.ieee.org/document/9364681)
 
 #### multi-stages
-- [Real-Time Text Steganalysis Based on Multi-Stage Transfer Learning (MS-TL) (waiting)](https://ieeexplore.ieee.org/abstract/document/9484749/)
+- [Real-Time Text Steganalysis Based on Multi-Stage Transfer Learning (MS-TL)](https://ieeexplore.ieee.org/abstract/document/9484749/)
 ------
 ### Transformer-based
 - [SeSy: Linguistic Steganalysis Framework Integrating Semantic and Syntactic Features (Sesy)](https://ieeexplore.ieee.org/abstract/document/9591452)
