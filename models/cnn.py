@@ -23,8 +23,8 @@ class TC_base(nn.Module):
 		result = []
 		for self.cnn in self.cnn_list:
 			__ = self.cnn(_)
-			__ = self.max_pool(__)
 			__ = self.relu(__)
+			__ = self.max_pool(__)
 			result.append(__.squeeze(dim=2))
 
 		_ = torch.cat(result, dim=1)
