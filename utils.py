@@ -3,8 +3,17 @@ import sklearn.metrics as metrics
 
 class MyDict(dict):
     __setattr__ = dict.__setitem__
-    __getattr__ = dict.__getitem__
-
+    # def __setattr__(self, key, value):
+    #     try:
+    #         self[key] = value
+    #     except:
+    #         raise  AttributeError(key)
+    # __getattr__ = dict.__getitem__
+    def __getattr__(self, item):
+        try:
+            return self[item]
+        except:
+            raise AttributeError(item)
 
 class Config(object):
     def __init__(self, config_path):
@@ -19,6 +28,7 @@ class Config(object):
         for k, v in dictobj.items():
             d[k] = self.dictobj2obj(v)
         return d
+
 
 
     def get_configs(self):

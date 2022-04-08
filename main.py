@@ -697,13 +697,13 @@ def main(Configs):
         # train_dataset = load_and_cache_examples(Dataset_Configs, Configs.task_name, tokenizer)  # , evaluate=False)
         global_step, tr_loss = train(model, Configs, tokenizer)
         logger.info(" global_step = %s, average loss = %s", global_step, tr_loss)
-        Tarining_Configs = Configs.Training_with_Processor
+        Training_Configs = Configs.Training_with_Processor
 
         checkpoints = [os.path.join(Configs.out_dir, Configs.checkpoint)]
         logger.info("Evaluate the following checkpoints: %s", checkpoints)
 
         for checkpoint in checkpoints:
-            tokenizer = AutoTokenizer.from_pretrained(checkpoint, do_lower_case=Tarining_Configs.do_lower_case)
+            tokenizer = AutoTokenizer.from_pretrained(checkpoint, do_lower_case=Training_Configs.do_lower_case)
             prefix = checkpoint.split("/")[-1]
             model = load_model(Configs, VOCAB_SIZE=tokenizer.vocab_size,checkpoint=checkpoint)
             # if not Configs.use_plm:
