@@ -9,7 +9,8 @@
   "seed": 42,
   "gpuid": "0",
   "task_name": "steganalysis",
-  "use_plm":false,
+  "use_plm":true,
+  "repeat_num":10,
 
   "Dataset": {
     "name": "tweet",

@@ -583,7 +583,7 @@ def load_and_cache_examples(Dataset_Configs, task, tokenizer, split="train"):
         return dataset
 
 
-def main(Configs):
+def main(Configs, seed_shift=0):
     # args conflict checking
     if Configs.use_plm:
             assert Configs.use_processor, "\nWhen using plm, You can only use processor to process dataset!!\n"
@@ -591,7 +591,7 @@ def main(Configs):
     Dataset_Configs = Configs.Dataset
     Configs.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     os.makedirs(Configs.out_dir,exist_ok=True)
-    set_seed(Configs.seed)
+    set_seed(Configs.seed+seed_shift)
 
     # Setup logging
     logging.basicConfig(
@@ -726,13 +726,30 @@ def main(Configs):
         f.write("test phase:\naccuracy\t{:.4f}\nprecision\t{:.4f}\nrecall\t{:.4f}\nf1_score\t{:.4f}"
                 .format(test_acc*100,test_precision*100,test_recall*100,test_Fscore*100))
 
+    return test_acc, test_precision, test_recall, test_Fscore
 
 
 if __name__ == '__main__':
     import argparse
+    import numpy as np
     parser = argparse.ArgumentParser(description="argument for generation")
     parser.add_argument("--config_path", type=str, default="./configs/test.json")
     args = parser.parse_args()
     Configs = utils.Config(args.config_path).get_configs()
     os.environ["CUDA_VISIBLE_DEVICES"] = Configs.gpuid
-    main(Configs)
+    total_test_acc=[]
+    total_test_precision=[]
+    total_test_recall=[]
+    total_test_Fscore=[]
+    for i in range(Configs.get("repeat_num", 1)):
+        test_acc, test_precision, test_recall, test_Fscore = main(Configs,seed_shift=i)
+        total_test_acc.append(test_acc)
+        total_test_precision.append(test_precision)
+        total_test_recall.append(test_recall)
+        total_test_Fscore.append(test_Fscore)
+    message = "Final results\n(repeat times: {}):\naccuracy\t{:.2f}%+{:.2f}%\nprecision\t{:.2f}%+{:.2f}%\nrecall\t{:.2f}%+{:.2f}%\nf1_score\t{:.2f}%+{:.2f}%"\
+        .format(Configs.get("repeat_num", 1), np.mean(total_test_acc)*100, np.std(total_test_acc)*100,
+                np.mean(total_test_precision)*100, np.std(total_test_precision)*100,
+                np.mean(total_test_recall)*100, np.std(total_test_recall)*100,
+                np.mean(total_test_Fscore)*100, np.std(total_test_Fscore)*100)
+    logger.info(message)
