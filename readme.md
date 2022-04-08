@@ -1,5 +1,9 @@
 # 文本隐写分析 (linguistic steganalysis)
 
+## 测试环境 (environment for development)
+python 3.7
+
+transformers 4.12
 
 ## 包含（include）
 ### Non-Transformer-based
