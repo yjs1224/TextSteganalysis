@@ -78,9 +78,10 @@ class SteganalysisProcessor(object):
                 example.sentence,
                 add_special_tokens=True,
                 max_length=self.max_seq_len,
-                pad_to_max_length=True,
+                padding='max_length',
                 return_attention_mask=True,
-                return_token_type_ids=True
+                return_token_type_ids=True,
+                truncation=True
             )
             input_ids = inputs["input_ids"]
             attention_mask = inputs["attention_mask"]
