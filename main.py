@@ -379,9 +379,9 @@ def train( model, Configs, tokenizer):
                 if Training_Configs.logging_steps > 0 and global_step % Training_Configs.logging_steps == 0:
                     # Log metrics
                     if Training_Configs.evaluate_during_training:  # Only evaluate when single GPU otherwise metrics may not average well
-                        results, _ , _ = evaluate( model, tokenizer, Configs, Configs.task_name, use_tqdm=False)
+                        results, _ , _ = evaluate(model, tokenizer, Configs, Configs.task_name, use_tqdm=False, split="train")
                         for key, value in results.items():
-                            eval_key = "eval_{}".format(key)
+                            eval_key = "Train_{}".format(key)
                             logs[eval_key] = value
 
                     loss_scalar = (tr_loss - logging_loss) / Training_Configs.logging_steps
@@ -465,8 +465,8 @@ def evaluate(model, tokenizer, Configs, task_name, split="dev", prefix="", use_t
 
     # Eval!
     logger.info(f"***** Running evaluation: {prefix} on {task_name} {split} *****")
-    logger.info("  Num examples = %d", len(eval_dataset))
-    logger.info("  Batch size = %d", Training_Configs.eval_batch_size)
+    logger.info("Num examples = %d", len(eval_dataset))
+    logger.info("Batch size = %d", Training_Configs.eval_batch_size)
     eval_loss = 0.0
     nb_eval_steps = 0
     preds = None
@@ -553,8 +553,8 @@ def load_and_cache_examples(Dataset_Configs, task, tokenizer, split="train"):
         logger.info("Loading tensors from cached file %s", cached_tensors_file)
         start_time = time.time()
         dataset = torch.load(cached_tensors_file)
-        logger.info("\tFinished loading tensors")
-        logger.info(f"\tin {time.time() - start_time}s")
+        logger.info("Finished loading tensors")
+        logger.info(f"in {time.time() - start_time}s")
 
     else:
         # no cached tensors, process data from scratch
@@ -568,13 +568,13 @@ def load_and_cache_examples(Dataset_Configs, task, tokenizer, split="train"):
 
         examples = get_examples(Dataset_Configs.csv_dir)
         dataset = processor.convert_examples_to_features(examples,)
-        logger.info("\tFinished creating features")
+        logger.info("Finished creating features")
 
-        logger.info("\tFinished converting features into tensors")
+        logger.info("Finished converting features into tensors")
         if Dataset_Configs.save_cache:
             logger.info("Saving features into cached file %s", cached_tensors_file)
             torch.save(dataset, cached_tensors_file)
-            logger.info("\tFinished saving tensors")
+            logger.info("Finished saving tensors")
 
     if task == "record" and split in ["dev", "test"]:
         answers = processor.get_answers(Dataset_Configs.csv_dir, split)
