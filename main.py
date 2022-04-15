@@ -650,7 +650,7 @@ def main(Configs, seed_shift=0):
             labels = [0]*len(covers) + [1]*len(stegos)
             val_ratio = (1-Dataset_Configs.split_ratio)/Dataset_Configs.split_ratio
             train_texts,test_texts,train_labels,test_labels = train_test_split(texts,labels,train_size=Dataset_Configs.split_ratio)
-            train_texts,val_texts,train_labels,val_labels = train_test_split(train_texts, train_labels, train_size=val_ratio)
+            train_texts,val_texts, train_labels,val_labels,  = train_test_split(train_texts, train_labels, train_size=1-val_ratio)
             def write2file(X, Y, filename):
                 with open(filename, "w", encoding="utf-8") as f:
                     writer = csv.writer(f)
