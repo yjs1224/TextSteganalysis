@@ -2,7 +2,7 @@
 
 # NOTICE
 ## Serious Bugs in older version (Please Check your versions):
-- #### The best model may be covered by worde model (Fixed)
+- #### The best model may be covered by worse model (Fixed)
 - #### metircs on train set are missed (Fixed)
 - #### split train and val in incorrect ratio (Fixed)
 
