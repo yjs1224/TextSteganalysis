@@ -1,5 +1,14 @@
 # 文本隐写分析 (linguistic steganalysis)
 
+# NOTICE
+## Serious Bugs in older version (Please Check your versions):
+- #### The best model may be covered by worde model (Fixed)
+- #### metircs on train set are missed (Fixed)
+- #### split train and val in incorrect ratio (Fixed)
+
+### Thanks for finding more bugs
+
+
 ## 测试环境 (environment for development)
 python 3.7
 

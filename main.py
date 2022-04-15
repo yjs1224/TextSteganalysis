@@ -397,7 +397,7 @@ def train( model, Configs, tokenizer):
                         or (step+1==t_total):
                     # evaluate
                     results, _, _ = evaluate(model, tokenizer, Configs, Configs.task_name, use_tqdm=False)
-                    logger.info("------Next Evalset will be loaded from cached file------")
+                    # logger.info("------Next Evalset will be loaded from cached file------")
                     Configs.Dataset.overwrite_cache = False
                     for key, value in results.items():
                         logs[f"eval_{key}"] = value
@@ -414,23 +414,23 @@ def train( model, Configs, tokenizer):
                         logger.info("Congratulations, best model so far!")
                         best_val_metric = curr_val_metric
 
-                    for output_dir in output_dirs:
-                        # in each dir, save model, tokenizer, args, optimizer, scheduler
-                        if not os.path.exists(output_dir):
-                            os.makedirs(output_dir)
-                        model_to_save = (
-                            model.module if hasattr(model, "module") else model
-                        )  # Take care of distributed/parallel training
-                        logger.info("Saving model checkpoint to %s", output_dir)
-                        if Configs.use_plm:
-                            model_to_save.save_pretrained(output_dir)
-                        else:
-                            torch.save(model_to_save, os.path.join(output_dir, "pytorch_model.bin"))
-                        torch.save(Configs.state_dict, os.path.join(output_dir, "training_args.bin"))
-                        torch.save(optimizer.state_dict(), os.path.join(output_dir, "optimizer.pt"))
-                        torch.save(scheduler.state_dict(), os.path.join(output_dir, "scheduler.pt"))
-                        tokenizer.save_pretrained(output_dir)
-                        logger.info("\tSaved model checkpoint to %s", output_dir)
+                        for output_dir in output_dirs:
+                            # in each dir, save model, tokenizer, args, optimizer, scheduler
+                            if not os.path.exists(output_dir):
+                                os.makedirs(output_dir)
+                            model_to_save = (
+                                model.module if hasattr(model, "module") else model
+                            )  # Take care of distributed/parallel training
+                            logger.info("Saving model checkpoint to %s", output_dir)
+                            if Configs.use_plm:
+                                model_to_save.save_pretrained(output_dir)
+                            else:
+                                torch.save(model_to_save, os.path.join(output_dir, "pytorch_model.bin"))
+                            torch.save(Configs.state_dict, os.path.join(output_dir, "training_args.bin"))
+                            torch.save(optimizer.state_dict(), os.path.join(output_dir, "optimizer.pt"))
+                            torch.save(scheduler.state_dict(), os.path.join(output_dir, "scheduler.pt"))
+                            tokenizer.save_pretrained(output_dir)
+                            logger.info("\tSaved model checkpoint to %s", output_dir)
 
 
             if Training_Configs.max_steps > 0 and global_step > Training_Configs.max_steps:
