@@ -5,11 +5,11 @@
 - #### 最好的模型可能会被较差的模型覆盖（已修复）
 - #### 训练集上的metircs缺失（已修复）
 - #### 以不正确的比率拆分train和val（已修复）
-- #### 添加了一些重要的注意事项（使用此repo之前请仔细阅读）
+- #### 添加了一些重要的注意事项, 见后文（使用此repo之前请仔细阅读）
 - #### The best model may be covered by worse model (Fixed)
 - #### metircs on train set are missed (Fixed)
 - #### split train and val in incorrect ratio (Fixed)
-- #### Add Attention. (Carefully read it before using this repo)
+- #### Add Important Attention below. (Carefully read it before using this repo)
 
 ### 感谢发现指出问题！
 ### Thanks for finding and reporting bugs!
