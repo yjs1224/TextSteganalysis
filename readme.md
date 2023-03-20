@@ -1,12 +1,18 @@
 # 文本隐写分析 (linguistic steganalysis)
 
 
-# NOTICE: Serious Bugs in older version (Please Check your versions):
+# NOTICE: 之前版本可能存在一些严重的bugs,请自己检查使用的版本。 Serious Bugs in older version (Please Check your versions):
+- #### 最好的模型可能会被较差的模型覆盖（已修复）
+- #### 训练集上的metircs缺失（已修复）
+- #### 以不正确的比率拆分train和val（固定）
+- #### 添加了一些重要的注意事项（使用此repo之前请仔细阅读）
 - #### The best model may be covered by worse model (Fixed)
 - #### metircs on train set are missed (Fixed)
 - #### split train and val in incorrect ratio (Fixed)
+- #### Add Attention. (Carefully read it before using this repo)
 
-### Thanks for finding and reporting bugs
+### 感谢发现指出问题！
+### Thanks for finding and reporting bugs!
 
 
 ## 测试环境 (environment for development)
@@ -39,6 +45,16 @@ transformers 4.12
 - For example: `python main.py --config_path ./configs/test.json`
 - As a reference, ./configs/test.json contains the hyper-parameters settings of various methods (redundant, delete and modify up to your own setting). Among them, "use_plm" is used to control whether the pretrained language model (PLM) is used to embed words. "model" indicates which method to be use. Modify the "training_with_processor" or "training" parameters according to your needs. It is recommended that the former, namely using processor for pre-processing your data. By default, we only set **num_ Train_ Epochs = 1, where models can not converge well in many datasets **.
 - For example, if you want to try the [TS-FCN](https://link.springer.com/article/10.1007/s11042-020-08716-w) method, a very easy way is to set "model" as "fcn", set "use_plm" as false, and then set the appropriate learning rate, epoch, batchsize, etc. (in Training_with_Processor), based on "test.json".
+
+## 注意事项(Attention!)
+- 之前的sesy config不是[论文](https://ieeexplore.ieee.org/abstract/document/9591452)中使用的config. 已修复(2023.03)。
+- 如果使用此代码进行不同方法的对比时，请仔细确认数据集的拆分方式是否相同。
+  - 可以在config.json 的Dataset中设置自己的“split_ratio”，例如设置为0.8, 则会产生0.2的test.csv”, 0.2的“val.csv”和0.6的“train.csv”
+  - 或者也可以将“stego_txt”和“cover_txt”设置为None，设置“resplit"为False，并将数据集放在“csv_dir”所指示的文件路径中。放置的数据集应根据对比实验的需要，事先自行拆分为“train.csv”、“val.csv”和“test.csv”。
+- Previous sesy config is not the configs used in paper [SESY](https://ieeexplore.ieee.org/abstract/document/9591452). We have fixed it.
+- When using this repo for camparation, please carefully confirm whether the spliting of data set is the same. 
+  - You can reset the "split_ratio" in Dataset config. For example, if set it to 0.8, you will get 0.2 "test.csv", 0.2 "val.csv", and 0.6 "train. csv".
+  - Or, you can set stego_txt and cover_txt as None, set "resplit" as False, and put your dataset in path "csv_dir". The dataset should beforehand be split into "train.csv", "val.csv" and "test.csv" by yourself.
 
 
 ## Codes Reference
