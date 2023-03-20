@@ -4,7 +4,7 @@
 # NOTICE: 之前版本可能存在一些严重的bugs,请自己检查使用的版本。 Serious Bugs in older version (Please Check your versions):
 - #### 最好的模型可能会被较差的模型覆盖（已修复）
 - #### 训练集上的metircs缺失（已修复）
-- #### 以不正确的比率拆分train和val（固定）
+- #### 以不正确的比率拆分train和val（已修复）
 - #### 添加了一些重要的注意事项（使用此repo之前请仔细阅读）
 - #### The best model may be covered by worse model (Fixed)
 - #### metircs on train set are missed (Fixed)
