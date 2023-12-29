@@ -652,7 +652,7 @@ def main(Configs, seed_shift=0):
             train_texts,test_texts,train_labels,test_labels = train_test_split(texts,labels,train_size=Dataset_Configs.split_ratio)
             train_texts,val_texts, train_labels,val_labels,  = train_test_split(train_texts, train_labels, train_size=1-val_ratio)
             def write2file(X, Y, filename):
-                with open(filename, "w", encoding="utf-8") as f:
+                with open(filename, "w", encoding="utf-8", newline="") as f:
                     writer = csv.writer(f)
                     writer.writerow(["text", "label"])
                     for x, y in zip(X, Y):
